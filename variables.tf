@@ -65,6 +65,17 @@ variable "single_nat_gateway" {
   default     = false
 }
 
+variable "reuse_nat_ips" {
+  description = "Should be true if you don't want EIPs to be created for your NAT Gateways and will instead pass them in via the 'external_nat_ip_ids' variable"
+  default     = false
+}
+
+variable "external_nat_ip_ids" {
+  description = "List of EIP IDs to be assigned to the NAT Gateways (used in combination with reuse_nat_ips)"
+  type        = "list"
+  default     = []
+}
+
 variable "enable_dynamodb_endpoint" {
   description = "Should be true if you want to provision a DynamoDB endpoint to the VPC"
   default     = false
@@ -100,6 +111,11 @@ variable "tags" {
   default     = {}
 }
 
+variable "vpc_tags" {
+  description = "Additional tags for the VPC"
+  default     = {}
+}
+
 variable "public_subnet_tags" {
   description = "Additional tags for the public subnets"
   default     = {}
@@ -127,6 +143,11 @@ variable "database_subnet_tags" {
 
 variable "elasticache_subnet_tags" {
   description = "Additional tags for the elasticache subnets"
+  default     = {}
+}
+
+variable "dhcp_options_tags" {
+  description = "Additional tags for the DHCP option set"
   default     = {}
 }
 
