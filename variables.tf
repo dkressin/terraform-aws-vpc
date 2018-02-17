@@ -1,3 +1,8 @@
+variable "create_vpc" {
+  description = "Controls if VPC should be created (it affects almost all resources)"
+  default     = true
+}
+
 variable "name" {
   description = "Name to be used on all the resources as identifier"
   default     = ""
@@ -102,14 +107,19 @@ variable "enable_vpn_gateway" {
   default     = false
 }
 
-variable "private_propagating_vgws" {
-  description = "A list of VGWs the private route table should propagate"
-  default     = []
+variable "vpn_gateway_id" {
+  description = "ID of VPN Gateway to attach to the VPC"
+  default     = ""
 }
 
-variable "public_propagating_vgws" {
-  description = "A list of VGWs the public route table should propagate"
-  default     = []
+variable "propagate_private_route_tables_vgw" {
+  description = "Should be true if you want route table propagation"
+  default     = false
+}
+
+variable "propagate_public_route_tables_vgw" {
+  description = "Should be true if you want route table propagation"
+  default     = false
 }
 
 variable "tags" {
@@ -129,6 +139,11 @@ variable "public_subnet_tags" {
 
 variable "private_subnet_tags" {
   description = "Additional tags for the private subnets"
+  default     = {}
+}
+
+variable "default_route_table_tags" {
+  description = "Additional tags for the default route table"
   default     = {}
 }
 
@@ -193,4 +208,34 @@ variable "dhcp_options_netbios_name_servers" {
 variable "dhcp_options_netbios_node_type" {
   description = "Specify netbios node_type for DHCP options set"
   default     = ""
+}
+
+variable "manage_default_vpc" {
+  description = "Should be true to adopt and manage Default VPC"
+  default     = false
+}
+
+variable "default_vpc_name" {
+  description = "Name to be used on the Default VPC"
+  default     = ""
+}
+
+variable "default_vpc_enable_dns_support" {
+  description = "Should be true to enable DNS support in the Default VPC"
+  default     = true
+}
+
+variable "default_vpc_enable_dns_hostnames" {
+  description = "Should be true to enable DNS hostnames in the Default VPC"
+  default     = false
+}
+
+variable "default_vpc_enable_classiclink" {
+  description = "Should be true to enable ClassicLink in the Default VPC"
+  default     = false
+}
+
+variable "default_vpc_tags" {
+  description = "Additional tags for the Default VPC"
+  default     = {}
 }
